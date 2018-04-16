@@ -1,0 +1,12 @@
+catatan:
+   Lvl 3 :  - Riwayat: semua riwayat harus terlihat. status penanganan di bedakan dengan warna
+            - Feedback saat mengirim form
+            - kirim email setelah kirim form
+            - form penilaian teknisi
+
+   Lvl 2 :  - Feedback saat menangani
+            - Feedback saat Selesai
+            - buat list di riwayat lvl3 berubah menjadi on progress
+            - kirim email setelah Selesai
+            - kirim form penilaian ke lvl3
+            
