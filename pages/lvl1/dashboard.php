@@ -45,7 +45,7 @@
    // cara akses data data_bulan
    // $data_bulan[index_bulan][index nilai];
 
-   $max_q = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT SUM(1)+5 AS `MAX` FROM `laporan`");
+   $max_q = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT SUM(1) AS `MAX` FROM `laporan`");
    $max_res = mysqli_fetch_assoc($max_q);
 ?>
 <!DOCTYPE html>
@@ -135,49 +135,93 @@
             <div class="card-body">
                <canvas id="myAreaChart" width="100%" height="30"></canvas>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            <div class="card-footer small text-muted" id="myTime3">Time</div>
          </div>
-         <div class="card mb-3">
-            <div class="card-header">
-               <i class="fa fa-table"></i> Data Table Example
-            </div>
-            <div class="card-body">
-               <div class="table-responsive">
-                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                     <thead>
-                        <tr class="text-center">
-                           <th>#</th>
-                           <th>NIP</th>
-                           <th>Nama</th>
-                           <th>Nilai</th>
-                        </tr>
-                     </thead>
-                     <tfoot>
-                        <tr class="text-center">
-                           <th>#</th>
-                           <th>NIP</th>
-                           <th>Nama</th>
-                           <th>Nilai</th>
-                        </tr>
-                     </tfoot>
-                     <tbody>
-                     <?php
-                        $top5_q = mysqli_query($GLOBALS['___mysqli_ston'], "SELECT * FROM pegawai where LEVEL_AKSES = 2");
-                        $no = 1;
-                        while ($data = mysqli_fetch_assoc($top5_q)) {
-                           echo '<tr>';
-                              echo '<td>'.$no.'</td>';
-                              echo '<td>'.$data['NIP'].'</td>';
-                              echo '<td>'.$data['NAMA'].'</td>';
-                              echo '<td></td>';
-                           echo '</tr>';
-                        }
-                     ?>
-                     </tbody>
-                  </table>
+         <div class="row">
+            <div class="col-lg-8">
+               <div class="card mb-3">
+                  <div class="card-header">
+                     <i class="fa fa-table"></i> Data Teknisi
+                  </div>
+                  <div class="card-body">
+                     <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                           <thead>
+                              <tr class="text-center">
+                                 <th>NIP</th>
+                                 <th>Nama</th>
+                                 <th>Nilai</th>
+                              </tr>
+                           </thead>
+                           <tfoot>
+                              <tr class="text-center">
+                                 <th>NIP</th>
+                                 <th>Nama</th>
+                                 <th>Nilai</th>
+                              </tr>
+                           </tfoot>
+                           <tbody>
+                           <?php
+                              $top5_q = mysqli_query($GLOBALS['___mysqli_ston'], "SELECT * FROM pegawai where LEVEL_AKSES = 2");
+                              while ($data = mysqli_fetch_assoc($top5_q)) {
+                                 echo '<tr>';
+                                    echo '<td>'.$data['NIP'].'</td>';
+                                    echo '<td>'.$data['NAMA'].'</td>';
+                                    echo '<td></td>';
+                                 echo '</tr>';
+                              }
+                           ?>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="card-footer small text-muted" id="myTime">Time</div>
                </div>
             </div>
-            <div class="card-footer small text-muted" id="myTime">Time</div>
+            <div class="col-lg-4">
+               <div class="card mb-3">
+                  <div class="card-header">
+                     <i class="fa fa-trophy"></i> Data Peringkat
+                  </div>
+                  <div class="card-body">
+                     <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                           <thead>
+                              <tr class="text-center">
+                                 <th>#</th>
+                                 <th>NIP</th>
+                                 <th>Nama</th>
+                                 <th>Nilai</th>
+                              </tr>
+                           </thead>
+                           <tfoot>
+                              <tr class="text-center">
+                                 <th>#</th>
+                                 <th>NIP</th>
+                                 <th>Nama</th>
+                                 <th>Nilai</th>
+                              </tr>
+                           </tfoot>
+                           <tbody>
+                           <?php
+                              $top5_q = mysqli_query($GLOBALS['___mysqli_ston'], "SELECT * FROM pegawai where LEVEL_AKSES = 2");
+                              $no = 1;
+                              while ($data = mysqli_fetch_assoc($top5_q)) {
+                                 echo '<tr>';
+                                    echo '<td>'.$no.'</td>';
+                                    echo '<td>'.$data['NIP'].'</td>';
+                                    echo '<td>'.$data['NAMA'].'</td>';
+                                    echo '<td></td>';
+                                 echo '</tr>';
+                              }
+                           ?>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="card-footer small text-muted" id="myTime2">Time</div>
+               </div>
+            </div>
          </div>
       </div>
       <!-- Bootstrap core JavaScript-->
@@ -193,6 +237,20 @@
          var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
          var date = month[dt.getMonth()] + " " + dt.getDate() + ", " +dt.getFullYear();
          document.getElementById("myTime").innerHTML= "Updated at " + date + ". " + time;
+      </script>
+      <script type="text/javascript">
+         var dt = new Date();
+         var month = ["January", "February", "March", "April", "May", "June", "July",	"August", "September", "October", "November", "December"];
+         var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+         var date = month[dt.getMonth()] + " " + dt.getDate() + ", " +dt.getFullYear();
+         document.getElementById("myTime2").innerHTML= "Updated at " + date + ". " + time;
+      </script>
+      <script type="text/javascript">
+         var dt = new Date();
+         var month = ["January", "February", "March", "April", "May", "June", "July",	"August", "September", "October", "November", "December"];
+         var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+         var date = month[dt.getMonth()] + " " + dt.getDate() + ", " +dt.getFullYear();
+         document.getElementById("myTime3").innerHTML= "Updated at " + date + ". " + time;
       </script>
       <script>
          var ctx = document.getElementById("myAreaChart");
